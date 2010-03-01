@@ -1,0 +1,97 @@
+
+\documentclass[a4paper, 10pt]{article}
+\usepackage{graphicx}
+
+\title{R to LaTeX}
+\author{Example}
+\date{}
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+
+\section{Logical}
+
+A faire :
+\begin{itemize}
+  \item Pour les boxplot logical $\sim$ continue, il faudrait inverser
+    le sens des boxplot et ajouter la courbe de regression logistique
+  \item Pour tous les graphes : ajoute-t-on des couleurs ? Auquel cas
+    la boxplot verte correspondrait à la densities verte, and so on...
+\end{itemize}
+
+\subsection{Logical $\sim$ Logical}
+\input{bivLogicalLogical.tex}
+
+\subsection{Logical $\sim$ Factor}
+\input{bivLogicalFactor.tex}
+
+\subsection{Logical $\sim$ Ordered}
+\input{bivLogicalOrdered.tex}
+
+\subsection{Logical $\sim$ Discrete}
+\input{bivLogicalDiscrete.tex}
+
+\subsection{Logical $\sim$ Continuous}
+\input{bivLogicalContinuous.tex}
+
+
+
+\section{Factor}
+
+\subsection{Factor $\sim$ Logical}
+\input{bivFactorLogical.tex}
+
+\subsection{Factor $\sim$ Factor}
+\input{bivFactorFactor.tex}
+
+\subsection{Factor $\sim$ Ordered}
+\input{bivFactorOrdered.tex}
+
+\subsection{Factor $\sim$ Discrete}
+\input{bivFactorDiscrete.tex}
+
+\subsection{Factor $\sim$ Continuous}
+\input{bivFactorContinuous.tex}
+
+
+
+\section{Ordered}
+
+\subsection{Ordered $\sim$ Logical}
+\input{bivOrdFactor.tex}
+
+\subsection{Ordered $\sim$ Factor}
+\input{bivOrdFactor.tex}
+
+\subsection{Ordered $\sim$ Ordered}
+\input{bivOrdOrdered.tex}
+
+\subsection{Ordered $\sim$ Discrete}
+\input{bivOrdDiscrete.tex}
+
+\subsection{Ordered $\sim$ Continuous}
+\input{bivOrdContinuous.tex}
+
+
+\section{Continuous}
+
+\subsection{Continuous $\sim$ Logical}
+\input{bivContFactor.tex}
+
+\subsection{Continuous $\sim$ Factor}
+\input{bivContFactor.tex}
+
+\subsection{Continuous $\sim$ Ordered}
+\input{bivContOrdered.tex}
+
+\subsection{Continuous $\sim$ Discrete}
+\input{bivContDiscrete.tex}
+
+\subsection{Continuous $\sim$ Continuous}
+\input{bivContContinuous.tex}
+
+
+\end{document}
