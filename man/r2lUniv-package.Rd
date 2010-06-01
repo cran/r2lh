@@ -1,9 +1,9 @@
 \name{r2lUniv}
-\alias{r2lUniv}
-\alias{r2lUniv-package}
+\alias{r2latexUniv-package}
+\alias{r2htmlUniv-package}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{~ Overview: R to LaTeX, Univariate Analyses ~}
+\title{~ Overview: R to LaTeX/HTML, Univariate Analyses ~}
 \description{
   \tabular{ll}{
     Package: \tab r2lUniv\cr
@@ -16,7 +16,9 @@
 \details{
   \code{r2lUniv} performs some basic analyses, then generates a
   code to be included in a LaTeX document to print the analyses in a (so
-  nice!) LaTeX way.
+  nice!) LaTeX way. See \url{/library/r2lh/doc/r2lhOutput.pdf} for
+  display details.
+
 }
 
 \section{r2lUniv, in real context...}{
@@ -39,9 +41,11 @@
     \item I give you one. I want your report by Friday 11th , 13:00
   }
   Bob pouts, internally smiling, and starts his Tetris again.
-  He knows that running \code{\link{rtlu}} on Friday 11th arround 12:30 will
+  He knows that running \code{\link{r2lu}} on Friday 11th arround 12:30 will
   be soon enough... As long as John does not know about
   \code{r2lu}, life is beautiful.
+
+  See \url{/library/r2lh/doc/r2lhOutput.pdf} for display details.
 }
 
 \section{Author}{
@@ -55,22 +59,19 @@
   MODAL'X / University of Paris Ouest - Nanterre
 }
 
-\section{English correction}{
-  Jean-Marc Chamot \cr
-  \email{jchamot@u-paris10.fr}\cr
-  Laboratoire "Sport & Culture" / "Sports & Culture" Laboratory \cr
-  University of Paris 10 / Nanterre
-}
-
-
 \references{LaTeX web site \url{http://www.latex-project.org/}\cr
 Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-Fraude.php}}
 
 
 \seealso{
-  \code{\link{rtlu}},
-  \code{\link{rtlMainFile}},
+  \code{\link{r2latexUniv}},
+  \code{\link{r2latexBiv}},
+  \code{\link{r2htmlUniv}},
+  \code{\link{r2htmlBiv}},
+  \code{\link{r2lMainFile}},
+  \code{\link{r2hMainFile}},
   \code{\link{examCheating}},
+  \code{\link{r2lh}},
   \code{\link{Sweave}},
   \code{\link[Hmisc]{latex}}
 }

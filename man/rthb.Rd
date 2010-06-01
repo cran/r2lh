@@ -1,17 +1,19 @@
-\name{rthb}
-\alias{rthb}
+\name{r2hb}
+\alias{r2hb}
+\alias{r2htmlBiv}
 
 
 \title{~ Function: R to HTML, Bivariate analysis ~}
 
 \description{
-  \code{rthb} performs some bivariate analyses, then generates code to be
+  \code{r2htmlBiv} (or \code{r2hb} in short) performs some bivariate analyses, then generates code to be
   included in a HTML document in order to print out the analyses on a Web page.
 }
 
 
 \usage{
-  rthb(formula,fileOut="",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10)
+  r2hb(formula,fileOut="",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10)
+  r2htmlBiv(formula,fileOut="",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10)
 }
 
 \arguments{
@@ -24,7 +26,7 @@
     the HTML summary will be saved. If empty, the HTML code is printed on screen.}
 
   \item{textBefore}{\code{[character] or [vector(character)]} : before
-    printing a variable analysis, \code{rthb} can write a
+    printing a variable analysis, \code{r2hb} can write a
     text. If \code{X} is a single variable,
     \code{textBefore} should be of length 1. If \code{X} is a \code{data.frame},
     \code{textBefore} can have same length as the number of columns of the \code{data.frame} (this lets
@@ -40,35 +42,35 @@
 
   \item{graphName}{\code{[character]} or \code{[vector(character)]} :
     prefix for the graph names. If empty, the graph names are
-    \code{V1} to \code{V length(data.frame)}}
+    \code{V1} to \code{V'length(data.frame)'}}
 
   \item{type}{\code{[character]} : type of plotting device used to export the
     graphics. Can be Windows metafile, PNG, JPEG, BMP (Windows bitmap format), TIFF,
     PostScript or PDF.}
 
   \item{displayStyle}{\code{[numeric]} or \code{[vector(numeric)]} :
-    when \code{X} is a factor, an ordered factor or a numeric discrete
-    variable (see \code{limDiscreteY} for details on discrete
-    variables), \code{rthb} proposes two different ways of displaying the results. The
-    first one is compact, it displays all the results on two lines. If the
+    \code{r2hb} proposes two different ways of displaying the results.
+
+    The first one is compact, it displays all the results on two lines. If the
     number of modalities of \code{X} is too big, this
     method could draw tables that outfit the page. In this case, a second display (on
     three lines, less compact but higher) is used.
 
-	The switch (compact/expanded) is done automatically by \code{rthb}
-	according to the number of modalities of \code{X}: when it is lower
-	than \code{displayStyle}, the compact style is used. When it is greater
-	or egal, the expanded style is used.
+    The switch (compact/expanded) is done automatically by \code{r2hb}
+    according to the number of modalities of \code{X}: when it is lower
+    than \code{displayStyle}, the compact style is used. When it is greater
+    or egal, the expanded style is used.
 
     If \code{X} is a data.frame, \code{displayStyle} can have the same
     length as \code{X}, or can be of length 1 (and be recycled).}
 
-  \item{limDiscreteY}{\code{[numeric]} : \code{rthb} distinguishes two kinds of \code{numeric} :
+  \item{limDiscreteY}{\code{[numeric]} : \code{r2hb} distinguishes two
+    kinds of \code{numeric} variables:
     \code{discrete} designates \code{numeric} variables with only a few
     modalities,  \code{continuous} designates \code{numeric} variables with many
     modalities. For the variable \code{Y}, the limit between 'few' and 'many' can be fixed by the
     user through the \code{limDiscreteY} argument. By setting
-    \code{limDiscreteY} to 5, the user will ask \code{rthb} to consider
+    \code{limDiscreteY} to 5, the user will ask \code{r2hb} to consider
     all the \code{numeric} variables with more than 5 modalities as
     \code{continuous} and all the variables with 5 modalities or less
     as \code{discrete}.
@@ -81,19 +83,19 @@
 }
 
 \details{
-  \code{rthb} performs some basic analyses, then generates
-  code to be included in a HTML document in order to print out the analyses in a 
+  \code{r2hb} performs some basic analyses, then generates
+  code to be included in a HTML document in order to print out the analyses in a
   Web page.
 
-  \code{rthb} performs the analyses automatically according to the
+  \code{r2hb} performs the analyses automatically according to the
   \code{data} class. It considers 5 classes: nominal with 2 modalities,
   nominal with 3 modalities or more, ordered, discrete and
   continuous (see the description of \code{limDiscreteY} for details on
   discrete and continuous).
 
   The analysis of the variable depends on the class of \code{Y} and
-  \code{X} wich gives 25 possible combinations. We will not describe all
-  of them here.
+  \code{X} wich gives 25 possible combinations. We will not give a
+  description here, all of them are presented in the pdf file \url{/library/r2lh/doc/r2lhOutput.pdf}.
 
   They can be divided in two categories. First (on the top of the
   tabular) are descriptive analyses:
@@ -140,21 +142,24 @@ The long display :
 +---+---+
 }
 
-  If \code{X} is a \code{data.frame}, \code{rthb} runs the analyses on every column.
+  If \code{X} is a \code{data.frame}, \code{r2hb} runs the analyses on
+  every column.
+
+  See \url{/library/r2lh/doc/r2lhOutput.pdf} for display detail.
 }
 
 \value{
-  \code{rthb} generates HTML code and either prints it on the screen, or saves it in a
+  \code{r2hb} generates HTML code and either prints it on the screen, or saves it in a
   file. It also generates several graphs, optionally
   in a different directory.
 }
 
 \section{Classical usage}{
-  The use of \code{rthb} goes through the following steps:
+  The use of \code{r2hb} goes through the following steps:
   \tabular{ll}{
     Step 1. \tab Load the data (usually, a \code{data.frame}).\cr
     Step 2. \tab Optionally, set some variables as \code{ordered}. \cr
-    Step 3. \tab Run \code{rthb(Y~dataFrame,"fileOut.html")}.\cr
+    Step 3. \tab Run \code{r2hb(Y~dataFrame,"fileOut.html")}.\cr
   }
   See examples of application.
 }
@@ -171,13 +176,6 @@ The long display :
   University of Paris Ouest - Nanterre
 }
 
-\section{English correction}{
-  Jean-Marc Chamot \cr
-  \email{jchamot@u-paris10.fr}\cr
-  Laboratoire "Sport & Culture" / "Sports & Culture" Laboratory \cr
-  University of Paris 10 / Nanterre
-}
-
 
 \references{HTML web site \url{http://www.latex-project.org/}\cr
 Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-Fraude.php}}
@@ -185,28 +183,33 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
 
 
 \seealso{
-  \code{\link{rthMainFile}},
-  \code{\link{rthu}},
-  \code{\link{r2lUniv-package}},
+  \code{\link{r2hMainFile}},
+  \code{\link{r2htmlUniv}},
+  \code{\link{r2htmlUniv-package}},
   \code{\link{examCheating}}
 }
 
 \examples{
+ # # # # # # # # # # # # # # # # # # #
+#    R to HTML, Bivariate Analyses    #
+ #        Artificial examples        #
+  #         Single variable         #
+   # # # # # # # # # # # # # # # # #
+
 ### Create some data
 V1 <- factor(LETTERS[floor(runif(50,1,4))])
 V2 <- rnorm(50,1,1)<0
 V3 <- ordered(LETTERS[floor(runif(50,1,4))])
 
 ### Create a directory for the output
-r2lhOutDir <- paste(tempdir(),"rthbExample",sep="/")
-if(!file.exists(r2lhOutDir)){dir.create(r2lhOutDir)}
-setwd(r2lhOutDir)
+if(!file.exists("tmp/r2hbExample",recursive=TRUE)){dir.create("tmp/r2hbExample",recursive=TRUE)}else{}
+setwd("tmp/r2hbExample")
 
-### Execute rthb
-rthb(V1~V2,fileOut="first.html",textBefore="<H2>Variables V1, V2, V3</H2>",graphName="Gr1",type="png")
-rthb(V2~V1,fileOut="second.html",graphName="Gr2",type="png")
-rthb(V3~V1,fileOut="third.html",textBefore="This is V3 vs. V1",graphDir="P",graphName="Gr3",type="png",displayStyle=2)
-rthMainFile(text="
+### Execute r2hb
+r2hb(V1~V2,fileOut="first.html",textBefore="<H2>Variables V1, V2, V3</H2>",graphName="Gr1",type="png")
+r2hb(V2~V1,fileOut="second.html",graphName="Gr2",type="png")
+r2hb(V3~V1,fileOut="third.html",textBefore="This is V3 vs. V1",graphDir="P",graphName="Gr3",type="png",displayStyle=2)
+r2hMainFile(text="
 <LU>
 <LI><A HREF='first.html'>First example</A></LI>
 <LI><A HREF='second.html'>Second example</A></LI>

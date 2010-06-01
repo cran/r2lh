@@ -1,3 +1,4 @@
-export("rtlu","rtlb","rtlMainFile","rthu","rthb","rthMainFile")
+export("r2lu","r2latexUniv","r2lb","r2latexBiv","r2lMainFile",
+       "r2hu","r2htmlUniv","r2hb","r2htmlBiv","r2hMainFile")
 #exportClasses("continuous","discrete")
 

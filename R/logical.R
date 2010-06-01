@@ -2,9 +2,9 @@
 ########### Functions for Logical ~ Logical ###########
 #######################################################
 
-r2lBivLogicalLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){
+r2lBivLogicalLogical <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){
     cat(r2lComment("rtlb Logical~Logical",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|ccc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|ccc|",out))
 
     # First line : Table Barplot Mosaic
     cat(r2lBuildColumnTitle(c("Table","Barplot","Mosaic"),hline=FALSE,out=out))
@@ -27,9 +27,9 @@ r2lBivLogicalLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png
 ########### Functions for Logical ~ Factor ############
 #######################################################
 
-r2lBivLogicalFactorWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalFactorWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Factor (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|ccc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|ccc|",out))
 
     # First line : Table Barplot Mosaic
     cat(r2lBuildColumnTitle(c("Table","Barplot","Mosaic"),hline=FALSE,out=out))
@@ -46,9 +46,9 @@ r2lBivLogicalFactorWide <- function(y,x,graphDir="graphBiv",graphName="V",type="
 }
 
 ### Non utilisé
-r2lBivLogicalFactorMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalFactorMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Factor (Mixed)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,
@@ -77,9 +77,9 @@ r2lBivLogicalFactorMixed <- function(y,x,graphDir="graphBiv",graphName="V",type=
 # r2lBivLogicalFactorMixed(f2,f3,graphDir="graphBiv",graphName="V4",out="latex")
 
 
-r2lBivLogicalFactorLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalFactorLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical ~ Factor (long)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out))
 
     # First line : Table and Mosaic
     cat(r2lBuildColumnTitle(c("Table","Mosaic"),hline=FALSE,out=out))
@@ -99,11 +99,11 @@ r2lBivLogicalFactorLong <- function(y,x,graphDir="graphBiv",graphName="V",type="
 }
 
 
-r2lBivLogicalFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivLogicalFactor <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivLogicalFactorWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalFactorWide(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivLogicalFactorLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalFactorLong(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
@@ -113,9 +113,9 @@ r2lBivLogicalFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png"
 ########### Functions for Logical ~ Ordered ###########
 #######################################################
 
-r2lBivLogicalOrderedWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalOrderedWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Ordered (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|ccc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|ccc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,
@@ -144,9 +144,9 @@ r2lBivLogicalOrderedWide <- function(y,x,graphDir="graphBiv",graphName="V",type=
     cat(r2lEndStruct(out))
 }
 
-r2lBivLogicalOrderedMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalOrderedMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Ordered (Mixed)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,
@@ -175,9 +175,9 @@ r2lBivLogicalOrderedMixed <- function(y,x,graphDir="graphBiv",graphName="V",type
 
 
 
-r2lBivLogicalOrderedLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalOrderedLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Ordered (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out))
 
     # First line : Table Summary
     cat(r2lBuildColumnTitle(c("Table","Summary"),hline=FALSE,out=out))
@@ -198,11 +198,11 @@ r2lBivLogicalOrderedLong <- function(y,x,graphDir="graphBiv",graphName="V",type=
 }
 
 
-r2lBivLogicalOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivLogicalOrdered <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivLogicalOrderedWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalOrderedWide(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivLogicalOrderedLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalOrderedLong(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
@@ -211,9 +211,9 @@ r2lBivLogicalOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png
 ########### Functions for logical ~ discrete ##########
 #######################################################
 
-r2lBivLogicalDiscreteWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalDiscreteWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Discrete (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|ccc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|ccc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,
@@ -244,9 +244,9 @@ r2lBivLogicalDiscreteWide <- function(y,x,graphDir="graphBiv",graphName="V",type
 #r2lBivLogicalDiscreteWide(concours,nbRedoublement,graphDir="graphBiv",graphName="Vc1",out="latex")
 
 
-r2lBivLogicalDiscreteMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalDiscreteMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Discrete (Mixed)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,
@@ -274,30 +274,43 @@ r2lBivLogicalDiscreteMixed <- function(y,x,graphDir="graphBiv",graphName="V",typ
 }
 
 
-r2lBivLogicalDiscreteLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex"){
+r2lBivLogicalDiscreteLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex"){
     cat(r2lComment("rtlb Logical~Discrete (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out))
 
-   # For the second column of the first line
-    attrs <- switch(out,
-        "html" = " align='center' cellpadding=5",
-        "latex" = "c"
-    )
-    columnTwo <- r2lStartTable(attrs=attrs,hline=FALSE,out=out)
-    columnTwo <- paste(columnTwo,
-                       r2lBuildRow(r2lBivSummary(x,as.factor(y),out=out),hline=TRUE,out=out),
-                       r2lBuildColumnTitle("Mosaic",hline=FALSE,out=out,border=""),
-                       r2lBuildRow(r2lGraphMosaicPlot(y,x,graphDir,graphName,type,out=out),out=out,border="",hline=FALSE),
-                       r2lEndTable(out))
-
-    # First line : Table Summary / Mosaic
+    # First line : Table Summary
     cat(r2lBuildColumnTitle(c("Table","Summary"),hline=FALSE,out=out))
     cat(r2lBuildRow(c(r2lBivContingencyTable(y,x,out=out),
-                      columnTwo),out=out))
+                      r2lBivSummary(x,as.factor(y),out=out)),out=out))
 
     # Second line : Barplot, Mosaic
-    cat(r2lBuildColumnTitle(c("Barplot"),span=2,hline=FALSE,out=out))
-    cat(r2lBuildRow(r2lGraphBarplot(y,x,graphDir,graphName,type,out=out),span=2,out=out))
+    cat(r2lBuildColumnTitle(c("Barplot","Mosaic"),hline=FALSE,out=out))
+    cat(r2lBuildRow(c(r2lGraphBarplot(y,x,graphDir,graphName,type,out=out),
+                      r2lGraphMosaicPlot(y,x,graphDir,graphName,type,out=out)),
+                    out=out))
+
+   # For the second column of the first line
+    ## attrs <- switch(out,
+    ##     "html" = " align='center' cellpadding=5",
+    ##     "latex" = "c"
+    ## )
+    ## columnTwo <- r2lStartTable(attrs=attrs,hline=FALSE,out=out)
+
+
+    ## columnTwo <- paste(columnTwo,
+    ##                    r2lBuildRow(r2lBivSummary(x,as.factor(y),out=out),hline=TRUE,out=out),
+    ##                    r2lBuildColumnTitle("Mosaic",hline=FALSE,out=out,border=""),
+    ##                    r2lBuildRow(r2lGraphMosaicPlot(y,x,graphDir,graphName,type,out=out),out=out,border="",hline=FALSE),
+    ##                    r2lEndTable(out))
+
+    ## # First line : Table Summary / Mosaic
+    ## cat(r2lBuildColumnTitle(c("Table","Summary"),hline=FALSE,out=out))
+    ## cat(r2lBuildRow(c(r2lBivContingencyTable(y,x,out=out),
+    ##                   columnTwo),out=out))
+
+    ## # Second line : Barplot, Mosaic
+    ## cat(r2lBuildColumnTitle(c("Barplot"),span=2,hline=FALSE,out=out))
+    ## cat(r2lBuildRow(r2lGraphBarplot(y,x,graphDir,graphName,type,out=out),span=2,out=out))
 
     # Third line : tests
     cat(r2lBuildColumnTitle("Tests",hline=FALSE,out=out,span=2))
@@ -308,11 +321,11 @@ r2lBivLogicalDiscreteLong <- function(y,x,graphDir="graphBiv",graphName="V",type
 
 
 
-r2lBivLogicalDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivLogicalDiscrete <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivLogicalDiscreteWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalDiscreteWide(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivLogicalDiscreteLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivLogicalDiscreteLong(y,x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
@@ -321,9 +334,9 @@ r2lBivLogicalDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="pn
 ########## Functions for logical ~ continuous #########
 #######################################################
 
-r2lBivLogicalContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){
+r2lBivLogicalContinuous <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){
     cat(r2lComment("rtlb Logical~Continuous (Wide)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|ccc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|ccc|",out=out))
 
     # First line : Table Barplot Mosaic
     cat(r2lBuildColumnTitle(c("Summary","Boxplot","Density"),hline=FALSE,out=out))
@@ -340,9 +353,9 @@ r2lBivLogicalContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="
 }
 
 ### Non utilisé
-r2lBivLogicalContinuousLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",dsplayStyle="wide"){
+r2lBivLogicalContinuousLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",dsplayStyle="wide"){
     cat(r2lComment("rtlb Logical~Continuous (Long)",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
     # For the second column of the first line
 	attrs <- switch(out,

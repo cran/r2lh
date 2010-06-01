@@ -1,13 +1,13 @@
-\name{rtlMainFile}
-\alias{rtlMainFile}
+\name{r2lMainFile}
+\alias{r2lMainFile}
 
 \title{~ Generation of LaTeX main document ~}
 \description{
   This function generates a LaTeX main document designed to include some
-  files built by \code{rtlu} or \code{rtlb}.
+  files built by \code{r2lu} or \code{r2lb}.
 }
 \usage{
-rtlMainFile(fileOut = "main.tex",text="",sweave=FALSE)
+r2lMainFile(fileOut = "main.tex",text="\\\\input{univ.tex}",sweave=FALSE)
 }
 
 \arguments{
@@ -20,8 +20,8 @@ rtlMainFile(fileOut = "main.tex",text="",sweave=FALSE)
 }
 
 \details{
-  \code{rtlMainFile} generates a LaTeX master file or a Sweave file ready to include some
-  files built by \code{rtlu} or \code{rtlb}.
+  \code{r2lMainFile} generates a LaTeX master file or a Sweave file ready to include some
+  files built by \code{r2lu} or \code{r2lb}.
 }
 \value{
   A LaTeX or a Sweave file ("main.tex" by default).
@@ -52,8 +52,8 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
 
 
 \seealso{
-  \code{\link{rtlu}},
-  \code{\link{rtlb}},
+  \code{\link{r2lu}},
+  \code{\link{r2lb}},
   \code{\link{r2lh-package}},
   \code{\link{examCheating}},
   \code{\link{Sweave}},
@@ -64,7 +64,7 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
  # # # # # # # # # # # # # # # # # # #
 #   R to LaTeX, Main file generation  #
  #             Examples              #
-  #           rtlMainFile           #
+  #           r2lMainFile           #
    # # # # # # # # # # # # # # # # #
 
 ### Creates a Sweave file
@@ -79,7 +79,7 @@ data(examCheating)
 \\\\section{Univariate analysis}
 
 <<>>=
-rtlu(examCheating$CheatScore,fileOut='ExamCheat-univ1.tex')
+r2lu(examCheating$CheatScore,fileOut='ExamCheat-univ1.tex')
 @
 \\\\input{ExamCheat-univ1.tex}
 
@@ -87,15 +87,15 @@ rtlu(examCheating$CheatScore,fileOut='ExamCheat-univ1.tex')
 \\\\section{Bivariate analysis}
 
 <<>>=
-#rtlb(examCheating$CheatScore~examCheating$Sexe,fileOut='ExamCheat-biv1.tex')
+#r2lb(examCheating$CheatScore~examCheating$Sexe,fileOut='ExamCheat-biv1.tex')
 @
 \\\\input{ExamCheat-biv1.tex}
 "
 
-if(!file.exists("example/sweave",recursive=TRUE)){dir.create("example/sweave",recursive=TRUE)}else{}
-setwd("example/sweave")
+if(!file.exists("tmp/sweave",recursive=TRUE)){dir.create("tmp/sweave",recursive=TRUE)}else{}
+setwd("tmp/sweave")
 
-rtlMainFile(fileOut="main.Rnw",text=text,sweave=TRUE)
+r2lMainFile(fileOut="main.Rnw",text=text,sweave=TRUE)
 Sweave("main.Rnw")
 setwd("../..")
 }

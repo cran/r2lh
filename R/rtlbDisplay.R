@@ -29,145 +29,144 @@
 #r2lBivFactorLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide")
 
 
-r2lBivFactorFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivFactorFactor <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivFactorFactorWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorFactorWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivFactorFactorLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorFactorLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivFactorOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivFactorOrdered <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivFactorOrderedWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorOrderedWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivFactorOrderedLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorOrderedLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivFactorDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivFactorDiscrete <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivFactorDiscreteWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorDiscreteWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivFactorDiscreteLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorDiscreteLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivFactorContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivFactorContinuous <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivFactorContinuousWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorContinuousWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivFactorContinuousLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivFactorContinuousLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-#r2lBivOrderedLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide")
+#r2lBivOrderedLogical <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide")
 
-r2lBivOrderedFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivOrderedFactor <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivOrderedFactorWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedFactorWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivOrderedFactorLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedFactorLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivOrderedOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivOrderedOrdered <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivOrderedOrderedWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedOrderedWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivOrderedOrderedLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedOrderedLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivOrderedDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivOrderedDiscrete <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivOrderedDiscreteWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedDiscreteWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivOrderedDiscreteLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedDiscreteLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivOrderedContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivOrderedContinuous <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivOrderedContinuousWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedContinuousWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivOrderedContinuousLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivOrderedContinuousLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-#r2lBivDiscreteLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide")
+#r2lBivDiscreteLogical <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide")
 
-r2lBivDiscreteFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivDiscreteFactor <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivDiscreteFactorWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteFactorWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivDiscreteFactorLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteFactorLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivDiscreteOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivDiscreteOrdered <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivDiscreteOrderedWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteOrderedWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivDiscreteOrderedLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteOrderedLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivDiscreteDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivDiscreteDiscrete <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivDiscreteDiscreteWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteDiscreteWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivDiscreteDiscreteLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteDiscreteLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-r2lBivDiscreteContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivDiscreteContinuous <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivDiscreteContinuousWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteContinuousWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivDiscreteContinuousLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivDiscreteContinuousLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
 
-#r2lBivContinuousLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+#r2lBivContinuousLogical <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
 
-r2lBivContinuousFactor <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivContinuousFactor <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivContinuousFactorWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousFactorWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivContinuousFactorLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousFactorLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
-r2lBivContinuousOrdered <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivContinuousOrdered <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivContinuousOrderedWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousOrderedWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivContinuousOrderedLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousOrderedLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
-r2lBivContinuousDiscrete <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
-cat("display=",displayStyle)
+r2lBivContinuousDiscrete <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     if(displayStyle=="wide"){
-        r2lBivContinuousDiscreteWide(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousDiscreteWide(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }else{
-        r2lBivContinuousDiscreteLong(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out)
+        r2lBivContinuousDiscreteLong(y=y,x=x,tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out)
     }
 }
 
-#r2lBivContinuousContinuous <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+#r2lBivContinuousContinuous <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
 
 

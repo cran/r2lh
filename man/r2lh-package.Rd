@@ -6,10 +6,10 @@
 \title{~ Overview: R to LaTeX / HTML ~}
 \description{
   \tabular{ll}{
-    Package: \tab r2lBiv\cr
+    Package: \tab r2lh\cr
     Type: \tab Package\cr
-    Version: \tab 0.5.0\cr
-    Date: \tab 2009-1-12\cr
+    Version: \tab 0.6.1\cr
+    Date: \tab 2009-06-01\cr
     License: \tab  GPL (>= 2) \cr
   }
 }
@@ -17,6 +17,7 @@
   \code{r2lBiv} performs some bivariate analyses, then generates
   code to be included in a LaTeX document in order to print out the analyses in a (so
   nice!) LaTeX way.
+  See \code{vignette(r2lh-exampleOfOutput)} for display details.
 }
 
 \section{r2lBiv, in real context...}{
@@ -41,7 +42,7 @@
   }
   Once more, Bob pouts, internally smiling, and starts again kicking
   some orc ass.
-  He knows that running \code{\link{rtlb}} will take him 2 or 3 minutes... As long as John does not know about
+  He knows that running \code{\link{r2lb}} will take him 2 or 3 minutes... As long as John does not know about
   \code{r2lb}, life is beautiful.
 }
 
@@ -56,23 +57,18 @@
   Modal'X / University of Paris Ouest - Nanterre \cr \cr
 }
 
-\section{English correction}{
-  Jean-Marc Chamot \cr
-  \email{jchamot@u-paris10.fr}\cr
-  Laboratoire "Sport & Culture" / "Sports & Culture" Laboratory \cr
-  University of Paris 10 / Nanterre
-}
-
-
 \references{LaTeX web site \url{http://www.latex-project.org/}\cr
 Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-Fraude.php}}
 
 
 \seealso{
-  \code{\link{rtlu}},\code{\link{rtlb}},
-  \code{\link{rtlMainFile}},
-  \code{\link{rthu}},\code{\link{rthb}},
-  \code{\link{rthMainFile}},
+  \code{\link{r2latexUniv-package}},
+  \code{\link{r2latexUniv}},
+  \code{\link{r2latexBiv}},
+  \code{\link{r2htmlUniv}},
+  \code{\link{r2htmlBiv}},
+  \code{\link{r2lMainFile}},
+  \code{\link{r2hMainFile}},
   \code{\link{examCheating}},
   \code{\link{Sweave}},
   \code{\link[Hmisc]{latex}}

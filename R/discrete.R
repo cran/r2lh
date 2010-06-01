@@ -1,33 +1,41 @@
 ############ 5.1
 ### Functions for Discrete ~ Logical
 
-r2lBivDiscreteLogical <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
+r2lBivDiscreteLogical <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide") {
     cat(r2lComment("r2lBivDiscreteLogical",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=4,tabSpec="|cc|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
-    # First line : Table, Quartiles, Barplot, Mosaic
-    cat(r2lBuildRow(c(r2lBold("Table",out),r2lBold("Summary",out),r2lBold("Barplot",out),r2lBold("Mosaic",out)),hline=FALSE,out=out))
-    cat(r2lBuildRow(c(r2lBivContingencyTable(y,x,out=out),
-					  r2lBivSummary(y,x,out=out),
-                      r2lGraphBarplot(y,x,graphDir,graphName,type,out=out),
+    ## First line : Table
+    cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=2))
+    cat(r2lBuildRow(c(r2lBivContingencyTable(y,x,out=out)),
+                    span=2, out=out))
+
+    ## Second line : Quartiles
+    cat(r2lBuildRow(c(r2lBold("Summary",out)),hline=FALSE,out=out,span=2))
+    cat(r2lBuildRow(c(r2lBivSummary(y,x,out=out)),
+                    span=2, out=out))
+
+    ## Third line : Barplot, Mosaic
+    cat(r2lBuildRow(c(r2lBold("Barplot",out),r2lBold("Mosaic",out)),hline=FALSE,out=out))
+    cat(r2lBuildRow(c(r2lGraphBarplot(y,x,graphDir,graphName,type,out=out),
                       r2lGraphMosaicPlot(y,x,graphDir,graphName,type,out=out)),
                     out=out))
 
-    # Second line : tests
-    cat(r2lBuildRow(r2lBold("Tests",out),hline=FALSE,out=out,span=4))
-    cat(r2lBuildRow(r2lBivTest(y,x,test=c("Khi2","FisherExact","Student","Wilcoxon"),line=c(T,F,T,F,F),out=out), span=4, out=out))
+    ## Fourth line : tests
+    cat(r2lBuildRow(r2lBold("Tests",out),hline=FALSE,out=out,span=2))
+    cat(r2lBuildRow(r2lBivTest(y,x,test=c("Khi2","FisherExact","Student","Wilcoxon"),line=c(T,F,T,F,F),out=out), span=2, out=out))
 
     cat(r2lEndStruct(out))
 }
-#  r2lBivDiscreteLogical(o1,f1,graphDir="graphBiv",graphName="V1",out="latex")
+#  r2lBivDiscreteLogical(o1,f1,tabTitle,graphDir="graphBiv",graphName="V1",out="latex")
 
 
 ############ 5.2
 ### Functions for Discrete ~ Factor
 
-r2lBivDiscreteFactorWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteFactorWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteFactorWide",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=4,tabSpec="|cc|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=4,tabSpec="|cc|cc|",out=out))
 
     # First line : Table, Quartiles, Barplot, Mosaic
     cat(r2lBuildRow(c(r2lBold("Table",out),r2lBold("Summary",out),r2lBold("Barplot",out),r2lBold("Mosaic",out)),hline=FALSE,out=out))
@@ -45,9 +53,9 @@ r2lBivDiscreteFactorWide <- function(y,x,graphDir="graphBiv",graphName="V",type=
 }
 
 
-r2lBivDiscreteFactorMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteFactorMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteFactorMixed",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|c|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|c|cc|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=3))
@@ -69,9 +77,9 @@ r2lBivDiscreteFactorMixed <- function(y,x,graphDir="graphBiv",graphName="V",type
 }
 
 
-r2lBivDiscreteFactorLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteFactorLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteFactorLong",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|c|c|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|cc|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=2))
@@ -101,9 +109,9 @@ r2lBivDiscreteFactorLong <- function(y,x,graphDir="graphBiv",graphName="V",type=
 ### Functions for Discrete ~ Ordered
 
 
-r2lBivDiscreteOrderedWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteOrderedWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteOrderedWide",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=4,tabSpec="|cc|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=4,tabSpec="|cc|cc|",out=out))
 
     # First line : Table, Quartiles, Barplot, Mosaic
     cat(r2lBuildRow(c(r2lBold("Table",out),r2lBold("Summary",out),r2lBold("Barplot",out),r2lBold("Mosaic",out)),hline=FALSE,out=out))
@@ -121,9 +129,9 @@ r2lBivDiscreteOrderedWide <- function(y,x,graphDir="graphBiv",graphName="V",type
 }
 
 
-r2lBivDiscreteOrderedMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteOrderedMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteOrderedMixed",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|c|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|c|cc|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=3))
@@ -145,9 +153,9 @@ r2lBivDiscreteOrderedMixed <- function(y,x,graphDir="graphBiv",graphName="V",typ
 }
 
 
-r2lBivDiscreteOrderedLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteOrderedLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteOrderedLong",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|c|c|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|c|c|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=2))
@@ -178,9 +186,9 @@ r2lBivDiscreteOrderedLong <- function(y,x,graphDir="graphBiv",graphName="V",type
 ############ 5.4
 ### Functions for Discrete ~ Discrete
 
-r2lBivDiscreteDiscreteWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteDiscreteWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteDiscreteWide",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=4,tabSpec="|cc|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=4,tabSpec="|cc|cc|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out),r2lBold("Summary",out),r2lBold("Barplot",out),r2lBold("Mosaic",out)),hline=FALSE,out=out))
@@ -198,9 +206,9 @@ r2lBivDiscreteDiscreteWide <- function(y,x,graphDir="graphBiv",graphName="V",typ
 }
 
 
-r2lBivDiscreteDiscreteMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteDiscreteMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteDiscreteMixed",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|c|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|c|cc|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=3))
@@ -222,9 +230,9 @@ r2lBivDiscreteDiscreteMixed <- function(y,x,graphDir="graphBiv",graphName="V",ty
 }
 
 
-r2lBivDiscreteDiscreteLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteDiscreteLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteDiscreteLong",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=2,tabSpec="|c|c|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=2,tabSpec="|c|c|",out=out))
 
     # First line : Table
     cat(r2lBuildRow(c(r2lBold("Table",out)),hline=FALSE,out=out,span=2))
@@ -253,9 +261,9 @@ r2lBivDiscreteDiscreteLong <- function(y,x,graphDir="graphBiv",graphName="V",typ
 ############ 5.5
 ### Functions for Discrete ~ Numeric
 
-r2lBivDiscreteContinuousWide <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteContinuousWide <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteContinuousWide",out=out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=3,tabSpec="|c|cc|",out=out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=3,tabSpec="|c|cc|",out=out))
 
     # First line : Summary, Boxplot, Density
     cat(r2lBuildRow(c(r2lBold("Summary",out),r2lBold("Boxplot",out),r2lBold("Density",out)),hline=FALSE,out=out))
@@ -272,9 +280,9 @@ r2lBivDiscreteContinuousWide <- function(y,x,graphDir="graphBiv",graphName="V",t
 }
 
 
-r2lBivDiscreteContinuousMixed <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteContinuousMixed <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteContinuousMixed",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=5,tabSpec="|ccccc|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=5,tabSpec="|ccccc|",out))
 
     # First line : Summay, Boxplot, ScatterPlot
     cat(r2lBuildRow(c(r2lBold("Summary",out),r2lBold("Boxplot",out),r2lBold("Scatter plot",out)),span=c(3,1,1),hline=FALSE,out=out))
@@ -295,9 +303,9 @@ r2lBivDiscreteContinuousMixed <- function(y,x,graphDir="graphBiv",graphName="V",
 }
 
 
-r2lBivDiscreteContinuousLong <- function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex") {
+r2lBivDiscreteContinuousLong <- function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex") {
     cat(r2lComment("r2lBivDiscreteContinuousLong",out))
-    cat(r2lBivBeginStruct(y,x,nbColumn=4,tabSpec="|ccc|c|",out))
+    cat(r2lBivBeginStruct(y,x,tabTitle,nbColumn=4,tabSpec="|ccc|c|",out))
 
     # First line : Summary
     cat(r2lBuildRow(r2lBold("Summary",out),span=4,hline=FALSE,out=out))

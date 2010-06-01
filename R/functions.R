@@ -1,3 +1,47 @@
+cat("   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   +++                     Begin Functions               +++
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n")
+
+redToBlue <- function(n,seqColor=matrix(c(1,0,0, 1,0,1, 0,0,1),3)){
+    c1 <- seqColor[,1]
+    c2 <- seqColor[,2]
+    c3 <- seqColor[,3]
+    cat("C1=",c1," C2=",c2," C3=",c3,"\n")
+    s <- seq(0,1,,n)
+    return(c(rgb(c1[1]*(1-s)+c2[1]*s,c1[2]*(1-s)+c2[2]*s,c1[3]*(1-s)+c2[3]*s),
+             rgb(c2[1]*(1-s)+c3[1]*s,c2[2]*(1-s)+c3[2]*s,c2[3]*(1-s)+c3[3]*s)))
+}
+
+redToBlue <- function(n){
+    sequ <- seq(0,1,,n)
+    return(rgb(pmin(1,2-sequ*2),0,pmin(1,sequ*2)))
+}
+
+
+######################################################################
+###                           High level                           ###
+######################################################################
+
+setClass(Class="continuous",contains=c("numeric"))
+setClass(Class="discrete",contains=c("numeric"))
+
+
+changeClass <- function(x,limDiscreteX){
+    if(class(x)[1]=="character"){x <- as.factor(x)}else{}
+    if(class(x)[1]=="logical"){x <- as.factor(x)}else{}
+    if(length(table(x))==2){class(x) <- c("logical",class(x))}
+    if(class(x)[1] %in% c("numeric","integer")){
+        if(length(table(x))<=limDiscreteX) {
+            class(x) <- c("discrete","numeric")
+        }else{
+            class(x) <- c("continuous","numeric")
+        }
+    }else{}
+    return(x)
+}
+
+
+
 ###############################################################
 ###      Utility functions to write out pieces of text      ###
 ###                    Both univ and biv                    ###
@@ -119,6 +163,13 @@ r2lBold <- function(str, out="latex") {
 	return(txt)
 }
 
+r2lUnderline <- function(str, out="latex") {
+	txt <- switch(out,
+		"html" = paste("<U>", str, "</U>", sep=""),
+		"latex" = paste("\\underline{", str, "}", sep=""))
+	return(txt)
+}
+
 
 r2lItal <- function(str, out="latex") {
 	txt <- switch(out,
@@ -164,7 +215,7 @@ r2lEndStruct <- function(out="latex") {
 
 ################# r2lUnivBeginStruct #################
 
-r2lUnivBeginStruct <- function(x,nbColumn=1,tabSpec="c", out="latex") {
+r2lUnivBeginStruct <- function(x,tabTitle,nbColumn=1,tabSpec="c", out="latex") {
 	txt <- character()
 	if (out == "latex") {
 		txt <- paste(txt, "\t\\begin{center}\n\t\\addtolength{\\leftskip}{-4cm}\\addtolength{\\rightskip}{-4cm}\n\n")
@@ -176,13 +227,18 @@ r2lUnivBeginStruct <- function(x,nbColumn=1,tabSpec="c", out="latex") {
 	)
 	txt <- paste(txt, r2lStartTable(attrs=attrs,hline=TRUE,out=out), sep="")
 
+        titleLine <- r2lBold(r2lUnderline(tabTitle,out=out),out=out)
+
 	headerLine <- paste(r2lBivBannerStr(x),
             switch(out, "html"= " - ", "latex" = " \\hfill "),
             "N=", length(x), " ; NA=", sum(is.na(x)), " (", round(sum(is.na(x))/length(x)*100, digits=2),
 	    switch(out, "html"= "%)", "latex" = "\\%)"),
             sep="")
 
-	txt <- paste(txt, r2lBuildRow(headerLine, span=nbColumn, hline=TRUE, out=out),sep="")
+	txt <- paste(txt,
+                     r2lBuildRow(titleLine, span=nbColumn, hline=FALSE, out=out),
+                     r2lBuildRow(headerLine, span=nbColumn, hline=TRUE, out=out),
+                     sep="")
 	return(txt)
 }
 
@@ -253,7 +309,7 @@ r2lUnivSummary <- function(x, out="latex") {
 
 ################# r2lBivBeginStruct #################
 
-r2lBivBeginStruct <- function(y,x,nbColumn=1,tabSpec="c",out="latex") {
+r2lBivBeginStruct <- function(y,x,tabTitle,nbColumn=1,tabSpec="c",out="latex") {
 	txt <- character()
 	if (out == "latex") {
 		txt <- paste(txt, "\t\\begin{center}\n\t\\addtolength{\\leftskip}{-4cm}\\addtolength{\\rightskip}{-4cm}\n\n")
@@ -268,16 +324,20 @@ r2lBivBeginStruct <- function(y,x,nbColumn=1,tabSpec="c",out="latex") {
 	)
 	txt <- paste(txt, r2lStartTable(attrs=attrs, out=out), sep="")
 
+        titleLine <- r2lBold(r2lUnderline(tabTitle,out=out),out=out)
+
 	formula <- paste(r2lBivBannerStr(y),
 		switch(out, "html" = " ~ ", "latex" = " $\\sim$ "),
 		r2lBivBannerStr(x))
 	headerLine <- paste(formula,
 		switch(out, "html" = " - ", "latex" = " \\hfill "),
-		"N=", length(y), " - NA=", numNA, " (", round(numNA/total*100, digits=2),
+		"N=", length(y), " ; NA=", numNA, " (", round(numNA/total*100, digits=2),
 		switch(out, "html" = "%)", "latex" = "\\%)"),
 		sep="")
-	txt <- paste(txt, r2lBuildRow(r2lBold(headerLine, out=out), span=nbColumn, out=out), sep="")
-
+	txt <- paste(txt,
+                     r2lBuildRow(titleLine, span=nbColumn, hline=FALSE, out=out),
+                     r2lBuildRow(headerLine, span=nbColumn, hline=TRUE, out=out),
+                     sep="")
 	return(txt)
 }
 
@@ -460,29 +520,32 @@ r2lBivContingencyTable <- function(y,x,out="latex") {
 ###############################################################
 
 r2lSignificance <- function(pvalue, out="latex") {
-	str <- character()
+    str <- character()
 
-	if (pvalue < 0.001) {
-		str <- switch(out,
-		"html" = "***",
-		"latex" = "$***$"
-		)
-	} else if (pvalue < 0.01) {
-		str <- switch(out,
-		"html" = "**",
-		"latex" = "$**$"
-		)
-	} else if (pvalue < 0.05) {
-		str <- switch(out,
-		"html" = "*",
-		"latex" = "$*$"
-		)
-	} else if (pvalue < 0.1) {
-		str <- "."
-	} else {
-		str <- " "
-	}
-	return(str)
+    if(is.na(pvalue)){
+        str="NA"
+    }else{
+        if(pvalue < 0.001){
+            str <- "***"
+        }else{
+            if(pvalue < 0.01){
+                str <- "**"
+            }else{
+                if(pvalue < 0.05){
+                    str <- "*"
+                }else{
+                    if(pvalue < 0.1){
+                        str <- "."
+                    }else{
+                        str <- " "
+                    }
+                }
+            }
+        }
+
+        if(out=="latex"){str <- paste("$",str,"$",sep="")}else{}
+    }
+    return(str)
 }
 
 
@@ -762,7 +825,7 @@ r2lBivTest <- function(y,x,test,line,out="latex"){
 ### r2lDensities is a basic function (like boxplot, barplot,...)
 r2lDensities <- function(y,x,...) {
     if (is.factor(x) || class(x)[1] == "discrete") {
-
+        myColor <- redToBlue(length(table(x)))
     # This is the case continuous ~ (nominal|ordered|discrete)
     # Clean up the NAs
         df <- na.omit(data.frame(y,x))
@@ -775,7 +838,7 @@ r2lDensities <- function(y,x,...) {
 
         lv <- levels(x)
         len <- length(lv)
-        colors <- rainbow(len)
+#       colors <- rev(rainbow(len,end=0.17))
 
         dd <- list()
         # First pass to calcul the densities
@@ -795,9 +858,9 @@ r2lDensities <- function(y,x,...) {
         }
 
         # Third pass to draw the densities
-        plot(dd[[1]],ylim=c(0,top), col=colors[1],type="l",...)
+        plot(dd[[1]],ylim=c(0,top), col=myColor[1],type="l",lwd=6,...)
         for (i in 2:length(dd)) {
-            lines(dd[[i]], col=colors[i])
+            lines(dd[[i]], col=myColor[i],lwd=6)
         }
     } else {
         # This is the case continuous ~ continuous
@@ -812,7 +875,7 @@ r2lDensities <- function(y,x,...) {
 
         # Transmit the arguments to plot
         plot(ddx, ylim=c(0,top), col="red",...)
-        lines(ddy, ylim=c(0,top), col="green",...)
+        lines(ddy, ylim=c(0,top), col="orange",...)
     }
 }
 
@@ -871,7 +934,7 @@ r2lMakePlot <- function(kind, arguments, graphDir, graphName, type, out="latex",
 	do.call(kind, arguments)
 
 	# Build the string to include the graphics
-	nch <- nchar(paste(getwd(),"/",sep=""))	
+	nch <- nchar(paste(getwd(),"/",sep=""))
 	txt <- r2lIncludeGraphics( substring(plotPath, nch+1), width=wd, out=out)
 	return(txt)
 }
@@ -881,15 +944,16 @@ r2lMakePlot <- function(kind, arguments, graphDir, graphName, type, out="latex",
 ### expect one var argument.
 
 r2lGraphQQPlot <- function(x,graphDir,graphName,type,out="latex") {
-	## To exchange axes -> datax=T
-	arguments <- list(y=x,main="", xlab="", ylab="")
-	txt <- r2lMakePlot(kind="qqnorm", arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
-	return(txt)
+    ## To exchange axes -> datax=T
+    arguments <- list(y=x,main="", xlab="", ylab="")
+    ppc <- r2lPixelsPerCm()
+    txt <- r2lMakePlot(kind="qqnorm", wd=2*ppc, arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
+    return(txt)
 }
 
 
 r2lGraphHist <- function(x,graphDir,graphName,type,out="latex") {
-	arguments <- list(x=x,col="grey", main="", xlab="", ylab="")
+	arguments <- list(x=x, main="", xlab="", ylab="", col=redToBlue(length(hist(x,plot=FALSE)$counts)))
 	txt <- r2lMakePlot(kind="hist", arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
 	return(txt)
 }
@@ -902,20 +966,20 @@ r2lGraphHist <- function(x,graphDir,graphName,type,out="latex") {
 r2lGraphBoxplot <- function(y,x,graphDir,graphName,type,out="latex") {
     arguments <- list(main="", xlab="", ylab="")
     if(missing(x)){
-        arguments <- list(y,main="", xlab="", ylab="")
-		num <- 2
+        num <- 2
+        arguments <- list(y,main="", xlab="", ylab="",col="orange")
     }else{
-        arguments <- list(y~x,main="", xlab="", ylab="")
-		num <- length(levels(as.factor(x)))
+        num <- length(levels(as.factor(x)))
+        arguments <- list(y~x,main="", xlab="", ylab="",col=redToBlue(num))
     }
-	ppc <- r2lPixelsPerCm()
-    txt <- r2lMakePlot(kind="boxplot", wd=((num+1)*ppc), arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
+    ppc <- r2lPixelsPerCm()
+    txt <- r2lMakePlot(kind="boxplot", wd=min(2+num/2,9)*ppc, arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
     return(txt)
 }
 
 
 r2lGraphMosaicPlot <- function(y,x,graphDir,graphName,type,out="latex") {
-	arguments <- list(x~y,main="", xlab="", ylab="",dir=c("h","v"), col=heat.colors(length(levels(as.factor(y)))))
+	arguments <- list(x~y,main="", xlab="", ylab="",dir=c("h","v"), col=redToBlue(length(levels(as.factor(y)))))
 	txt <- r2lMakePlot(kind="mosaicplot", arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
 	return(txt)
 }
@@ -936,22 +1000,29 @@ r2lGraphBarplot <- function(y,x,graphDir,graphName,type,out="latex") {
         } else {
             tabVar <- table(y)
         }
+        numCol <- num <- dim(tabVar)
+
     }else{
         tabVar <- table(y, x)
-	}
-	num <- dim(tabVar)[1]
-	ppc <- r2lPixelsPerCm()
-    arguments <- list(tabVar, main="", xlab="", ylab="", beside=TRUE, col=heat.colors(num))
-    txt <- r2lMakePlot(kind="barplot", wd=((num+1)*ppc), arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
+        num <- prod(dim(tabVar))
+        numCol <- dim(tabVar)[1]
+    }
+    ppc <- r2lPixelsPerCm()
+    arguments <- list(tabVar, main="", xlab="", ylab="", beside=TRUE, col=redToBlue(numCol))
+    txt <- r2lMakePlot(kind="barplot", wd=min(2+num/2,9)*ppc, arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
     return(txt)
 }
 
 
 r2lGraphDensity <- function(y,x,graphDir,graphName,type,out="latex") {
     arguments <- list(y=y,x=x,main="", xlab="", ylab="")
-    txt <- r2lMakePlot(kind="r2lDensities", arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
+    ppc <- r2lPixelsPerCm()
+    txt <- r2lMakePlot(kind="r2lDensities", wd=3*ppc,arguments=arguments, graphDir=graphDir, graphName=graphName, type=type, out=out)
     return(txt)
 }
 
 
 
+cat("   ---------------------------------------------------------
+   ---                       Fin Functions               ---
+   ---------------------------------------------------------\n")

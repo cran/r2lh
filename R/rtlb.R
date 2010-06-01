@@ -3,10 +3,11 @@
 ###                               S4                               ###
 ######################################################################
 
-setClass(Class="continuous",contains=c("numeric"))
-setClass(Class="discrete",contains=c("numeric"))
+### Ces deux classes sont définies dans "functions.R" parce qu'univ en a aussi besoin.
+#setClass(Class="continuous",contains=c("numeric"))
+#setClass(Class="discrete",contains=c("numeric"))
 
-setGeneric(name="r2lBiv",def=function(y,x,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){standardGeneric("r2lBiv")})
+setGeneric(name="r2lBiv",def=function(y,x,tabTitle,graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle="wide"){standardGeneric("r2lBiv")})
 
 setMethod(f="r2lBiv",signature=c("logical","logical"),def=r2lBivLogicalLogical)
 setMethod(f="r2lBiv",signature=c("logical","factor"),def=r2lBivLogicalFactor)
@@ -48,62 +49,48 @@ setMethod(f="r2lBiv",signature=c("continuous","continuous"),def=r2lBivContinuous
 
 
 
-######################################################################
-###                           High level                           ###
-######################################################################
-
-changeClass <- function(x,limDiscreteX){
-    if(class(x)[1]=="character"){x <- as.factor(x)}else{}
-    if(class(x)[1]=="logical"){x <- as.factor(x)}else{}
-    if(length(table(x))==2){class(x) <- c("logical",class(x))}
-    if(class(x)[1] %in% c("numeric","integer")){
-        if(length(table(x))<=limDiscreteX) {
-            class(x) <- c("discrete","numeric")
-        }else{
-            class(x) <- c("continuous","numeric")
-        }
-    }else{}
-    return(x)
-}
-
 
 ################################
 ### Function rtlb, highest level.
 ### It opens a file, creates the directories, cuts the formula in two variables then calls r2lBiv
 
-rtlb <- function(formula,fileOut="",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
+rtlb <- r2lb <- r2latexBiv <- function(formula,fileOut="bivAnalysis.tex",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
     if (fileOut!="") {
         on.exit(sink())
         sink(fileOut)
     }
-    if (graphDir!="") {
-        dir.create(graphDir,showWarnings=FALSE)
-    }
-    y <- eval(formula[[2]],envir=parent.frame(n=1))
-    x <- eval(formula[[3]],envir=parent.frame(n=1))
 
-    rtlBiv(y,x,textBefore=textBefore,textAfter=textAfter,graphDir=graphDir,graphName=graphName,type=type,out="latex",displayStyle=displayStyle,limDiscreteY=limDiscreteY,limDiscreteX=limDiscreteX)
+    if (graphDir!="") {dir.create(graphDir,showWarnings=FALSE)}else{}
+
+    y <- eval(formula[[2]],envir=parent.frame(n=1))
+    nameY <- deparse(formula[[2]])
+    x <- eval(formula[[3]],envir=parent.frame(n=1))
+    if(class(x)[1]=="data.frame"){nameX <- colnames(x)}else{nameX <- deparse(formula[[3]])}
+
+    rtlBiv(y,x,nameY,nameX,textBefore=textBefore,textAfter=textAfter,graphDir=graphDir,graphName=graphName,type=type,out="latex",displayStyle=displayStyle,limDiscreteY=limDiscreteY,limDiscreteX=limDiscreteX)
     return(invisible())
 }
 
-rthb <- function(formula,fileOut="",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
+rthb <- r2hb <- r2htmlBiv <- function(formula,fileOut="bivAnalysis.html",textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
     if (fileOut!="") {
         on.exit(sink())
         sink(fileOut)
     }
-    if (graphDir!="") {
-        dir.create(graphDir,showWarnings=FALSE)
-    }
-    y <- eval(formula[[2]],envir=parent.frame(n=1))
-    x <- eval(formula[[3]],envir=parent.frame(n=1))
+    if (graphDir!="") {dir.create(graphDir,showWarnings=FALSE)}else{}
 
-    rtlBiv(y,x,textBefore=textBefore,textAfter=textAfter,graphDir=graphDir,graphName=graphName,type=type,out="html",displayStyle=displayStyle,limDiscreteY=limDiscreteY,limDiscreteX=limDiscreteX)
+    y <- eval(formula[[2]],envir=parent.frame(n=1))
+    nameY <- deparse(formula[[2]])
+
+    x <- eval(formula[[3]],envir=parent.frame(n=1))
+    if(class(x)[1]=="data.frame"){nameX <- colnames(x)}else{nameX <- deparse(formula[[3]])}
+
+    rtlBiv(y,x,nameY,nameX,textBefore=textBefore,textAfter=textAfter,graphDir=graphDir,graphName=graphName,type=type,out="html",displayStyle=displayStyle,limDiscreteY=limDiscreteY,limDiscreteX=limDiscreteX)
     return(invisible())
 }
 
-rtlBiv <- function(y,x,textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
+rtlBiv <- function(y,x,nameY,nameX,textBefore="",textAfter="",graphDir="graphBiv",graphName="V",type="png",out="latex",displayStyle=7,limDiscreteY=10,limDiscreteX=10){
     if(class(x)[1]=="data.frame"){
-        cat(r2lComment("r2lu.data.frame",out=out))
+        cat(r2lComment("r2lb.data.frame",out=out))
         nbVar <- length(x)
         if (length(textBefore)==1) {textBefore <- rep(textBefore,time=nbVar)}else{}
         if (length(textAfter)==1) {textAfter <- rep(textAfter,time=nbVar)}else{}
@@ -123,27 +110,29 @@ rtlBiv <- function(y,x,textBefore="",textAfter="",graphDir="graphBiv",graphName=
             displayStyle <- displayAux
         }
         for (i in 1:nbVar) {
-            rtlBiv(y,x[,i],textBefore=textBefore[i],textAfter=textAfter[i],graphDir=graphDir,graphName=graphName[i],
+            rtlBiv(y,x[,i],nameY,nameX[i],textBefore=textBefore[i],textAfter=textAfter[i],graphDir=graphDir,graphName=graphName[i],
                    type=type,out=out,displayStyle=displayStyle[i],limDiscreteY=limDiscreteY,limDiscreteX=limDiscreteX[i])
         }
     }else{
         y <- changeClass(y,limDiscreteY)
         x <- changeClass(x,limDiscreteX)
         if(!displayStyle%in%c("wide","long")){
-            if(as.integer(displayStyle)>=length(table(y))){
+            if(length(table(y)) < as.integer(displayStyle)-2 & length(table(x)) < as.integer(displayStyle)){
                 displayStyle <- "wide"
             }else{
                 displayStyle <- "long"
             }
         }
+        nameY <- paste(unlist(strsplit(nameY,"$",fixed=TRUE)),collapse="\\$")
+        nameX <- paste(unlist(strsplit(nameX,"$",fixed=TRUE)),collapse="\\$")
+        tabTitle <- paste(nameY,ifelse(out=="latex"," $\\sim$ ","~"),nameX,sep="")
+
         cat(textBefore,"\n")
-#        cat("X=",class(y)," Y=",class(x))
-        r2lBiv(y=y,x=x,graphDir=graphDir,graphName=graphName,type=type,out=out,displayStyle=displayStyle)
+        r2lBiv(y=y,x=x,tabTitle=tabTitle,graphDir=graphDir,graphName=graphName,type=type,out=out,displayStyle=displayStyle)
         cat(textAfter,"\n")
     }
     return(invisible())
 }
-
 
 
 

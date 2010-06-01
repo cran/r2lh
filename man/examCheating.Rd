@@ -83,10 +83,12 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
 
 
 \seealso{
-  \code{\link{r2lUniv-package}},
-  \code{\link{rtlu}},
-  \code{\link{rtlMainFile}},
-  \code{\link{examCheating}},
+  \code{\link{r2latexUniv-package}},
+  \code{\link{r2lh-package}},
+  \code{\link{r2latexUniv}},
+  \code{\link{r2latexBiv}},
+  \code{\link{r2htmlUniv}},
+  \code{\link{r2htmlBiv}},
   \code{\link{Sweave}},
   \code{\link[Hmisc]{latex}}
 }

@@ -1,13 +1,13 @@
-\name{rthMainFile}
-\alias{rthMainFile}
+\name{r2hMainFile}
+\alias{r2hMainFile}
 
 \title{~ Generation of HTML main document ~}
 \description{
-  This function generates an HTML main document designed to include 
-  links to some files built by \code{rthu} or \code{rthb}.
+  This function generates an HTML main document designed to include
+  links to some files built by \code{r2hu} or \code{r2hb}.
 }
 \usage{
-rthMainFile(fileOut = "main.html",text="<OBJECT data='univ.html' type='text/html'></OBJECT>",sweave=FALSE)
+r2hMainFile(fileOut = "main.html",text="<OBJECT data='univ.html' type='text/html'></OBJECT>",sweave=FALSE)
 }
 
 \arguments{
@@ -20,8 +20,8 @@ rthMainFile(fileOut = "main.html",text="<OBJECT data='univ.html' type='text/html
 }
 
 \details{
-  \code{rthMainFile} generates an HTML master file ready to include links to some
-  files built by \code{rthu} or \code{rthb}.
+  \code{r2hMainFile} generates an HTML master file ready to include links to some
+  files built by \code{r2hu} or \code{r2hb}.
 }
 \value{
    A HTML file ("main.html" by default).
@@ -38,13 +38,6 @@ rthMainFile(fileOut = "main.html",text="<OBJECT data='univ.html' type='text/html
   University of Paris Ouest - Nanterre
 }
 
-\section{English correction}{
-  Jean-Marc Chamot \cr
-  \email{jchamot@u-paris10.fr}\cr
-  Laboratoire "Sport & Culture" / "Sports & Culture" Laboratory \cr
-  University of Paris 10 / Nanterre\cr
-}
-
 
 \references{HTML web site \url{http://www.w3.org/TR/html/}\cr
 Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-Fraude.php}}
@@ -52,8 +45,8 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
 
 
 \seealso{
-  \code{\link{rthu}},
-  \code{\link{rthb}},
+  \code{\link{r2hu}},
+  \code{\link{r2hb}},
   \code{\link{r2lh-package}},
   \code{\link{examCheating}},
   \code{\link{Sweave}}
@@ -63,12 +56,14 @@ Data are available on line: \url{http://christophe.genolini.free.fr/EPO/EPO2007-
  # # # # # # # # # # # # # # # # # # #
 #   R to HTML, Main file generation   #
  #             Examples              #
-  #           rthMainFile           #
+  #           r2hMainFile           #
    # # # # # # # # # # # # # # # # #
 
 
 ### Creates a file named "main.html" that includes "univ.html"
-rthMainFile()
+if(!file.exists("tmp")){dir.create("tmp")};setwd("tmp")
+r2hMainFile()
+setwd("../..")
 }
 
 
