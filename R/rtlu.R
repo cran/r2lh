@@ -12,7 +12,7 @@ r2lUnivFactor <- function(x,tabTitle,textBefore="",textAfter="",graphDir="graphU
     cat(r2lBuildRow(x=c(r2lBold("Frequency",out),r2lBold("Histogram",out)),hline=FALSE,out=out))
     rowTxt <- r2lBuildRow(x=c(
         r2lUnivFrequency(x, out=out),
-        r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
+        #r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
     ),out=out)
     cat(rowTxt)
     cat(r2lEndStruct(out=out))
@@ -40,7 +40,7 @@ r2lUnivOrdered <- function(x,tabTitle,textBefore="",textAfter="",graphDir="graph
     rowTxt <- r2lBuildRow(x=c(
         r2lUnivFrequency(x, out=out),
         r2lUnivSummary(x, out=out),
-        r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
+        #r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
     ), out=out)
     cat(rowTxt)
     cat(r2lEndStruct(out=out))
@@ -55,8 +55,8 @@ r2lUnivDiscrete <- function(x,tabTitle,textBefore="",textAfter="",graphDir="grap
     rowTxt <- r2lBuildRow(x=c(
         r2lUnivFrequency(x, out=out),
         r2lUnivSummary(x, out=out),
-        r2lGraphBoxplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out),
-        r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
+        #r2lGraphBoxplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out),
+        #r2lGraphBarplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
     ), out=out)
     cat(rowTxt)
     cat(r2lEndStruct(out=out))
@@ -70,8 +70,8 @@ r2lUnivContinuous <- function(x,tabTitle,textBefore="",textAfter="",graphDir="gr
     cat(r2lBuildRow(x=c(r2lBold("Summary",out),r2lBold("Boxplot",out),r2lBold("Histogram",out)),hline=FALSE,out=out))
     rowTxt <- r2lBuildRow(x=c(
         r2lUnivSummary(x, out=out),
-        r2lGraphBoxplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out),
-        r2lGraphHist(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
+        #r2lGraphBoxplot(x, graphDir=graphDir, graphName=graphName, type=type, out=out),
+        #r2lGraphHist(x, graphDir=graphDir, graphName=graphName, type=type, out=out)
     ), out=out)
     cat(rowTxt)
     cat(r2lEndStruct(out=out))
